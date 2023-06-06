@@ -1,0 +1,89 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load thumbnail %}
+{% block title %}<title>Самовар</title>{% endblock title %}
+{%block content%}
+
+{% comment %} <cection>
+  <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
+    
+    <div class="row">
+      <div class="container-my">
+      <div class="col" style="background:  white;">
+        {% for pod in podcategorys%}
+        <nav >
+          <ul class="menu d-flex justify-content-center">
+            <li class="menu__item1">
+              
+              <a href="{% url 'products:podcategory' pod.slug%}"> {{pod.name}}</a>
+            </li>
+            {% endfor %}
+            
+            </li>
+          </ul>
+        </nav>
+      </div>
+      </div>
+    </div>
+  
+
+
+
+</cection> {% endcomment %}
+      
+       
+
+    <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
+
+        
+            <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
+
+                <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="">
+                {{category}}
+  </a>
+  
+                <div class="flex items-center" id="store-nav-content">
+
+                  
+
+                 
+
+                </div>
+          </div>
+        </nav>
+        
+        
+        {% for product in products%}
+        
+
+        <div class="col-4">
+        
+        
+                 
+              
+          <div class="card" style="width: 20rem;">
+            <a href="{% url 'products:product' product.slug%}">
+            {% thumbnail product.image "400x400" crop="center" as im %}
+            <img src="{{ im.url }}" class="card-img-top" alt="...">
+            {% endthumbnail %}
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5></a>
+              <p class="card-text">{{product.price}}</p>
+              <p class="card-text">{{product.description}}</p>
+                  <form action="{% url "cart:cart_add" product_id=product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <input type="submit" value= заказать class="btn btn-primary">
+                </form>
+                  
+            </div>
+          </div>
+        </div>
+      
+        {% endfor %}
+        
+
+{%endblock%}
+    
+

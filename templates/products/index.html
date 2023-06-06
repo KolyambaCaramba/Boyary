@@ -1,0 +1,164 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load thumbnail %}
+{% block title %}<title>Самовар</title>{% endblock title %}
+{%block content%}
+
+{% comment %} верхний байнер
+         {% endcomment %}
+  <cection id="first menu" class="first menu"> 
+      <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
+            <img src="{% static 'img/PrivetPicture.png' %}" class="card-img-top">
+        
+        </div>
+      
+  </cection>
+  <cection>
+      <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
+        
+        <div class="row">
+          <div class="container-my">
+          <div class="col" style="background:  white;">
+            {% for pod in podcategorys%}
+            <nav >
+              <ul class="menu d-flex justify-content-center">
+                <li class="menu__item1">
+                  
+                  <a href="{% url 'products:podcategory' pod.slug%}"> {{pod.name}}</a>
+                </li>
+                {% endfor %}
+                
+                
+              </ul>
+            </nav>
+          </div>
+          </div>
+        </div>
+      </cection>
+
+  {% for cat in categorys%}
+      <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
+                <a class=" container uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="{% url 'products:category' cat.slug%}">
+                {{cat.name}}
+                </a>
+  
+                <div class="flex items-center" id="store-nav-content">
+                </div>
+          </div>
+        
+       
+        
+
+        {%for product in cat.products.all%}
+        <div class="col-4">
+        
+        
+                 
+              
+              <div class="card" style="width: 20rem;" "background-color:rgb(195,153,100)">
+                <a href="{% url 'products:product' product.slug%}">
+                {% thumbnail product.image "400x400" crop="center" as im %}
+                <img src="{{ im.url }}" class="card-img-top" alt="...">
+                {% endthumbnail %}
+                <div class="card-body">
+                  <h4 class="card-title" id="namepr{{product.id}}">{{product.name}}</h4></a>
+                  <p class="card-text">{{product.price}}</p>
+                  <p class="card-text">{{product.description}}</p>
+                  <span id="divpr{{product.id}}" class="divpr">
+                    <button id="pr{{product.id}}" class="btn btn-primary cart">добавить в карзину</button>
+                </span>
+                
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+      
+        {% endfor %}
+      
+        
+  
+{%endblock%}
+{% block js %}
+<script>
+  // Find out the cart items from localStorage
+  if (localStorage.getItem('cart') == null) {
+      var cart = {};
+  } else {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      updateCart(cart);
+  }
+  // If the add to cart button is clicked, add/increment the item
+  //$('.cart').click(function() {
+      $('.divpr').on('click', 'button.cart', function(){
+      var idstr = this.id.toString();
+      if (cart[idstr] != undefined) {
+          cart[idstr] = cart[idstr] + 1;
+      } else {
+          cart[idstr] = 1;
+      }
+      updateCart(cart);
+  });
+  //Add Popover to cart
+  $('#popcart').popover();
+  updatePopover(cart);
+  function updatePopover(cart) {
+      console.log('We are inside updatePopover');
+      var popStr = "";
+      popStr = popStr + "<h5> Быстрый просмотр корзины </h5><div class='mx-2 my-2'>";
+      var i = 1;
+      for (var item in cart) {
+          popStr = popStr + "<b>" + i + "</b>. ";
+          popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... шт: " + cart[item] + '<br>';
+          i = i + 1;
+      }
+      popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>заказать</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>удалить</button>     "
+      console.log(popStr);
+      document.getElementById('popcart').setAttribute('data-content', popStr);
+      $('#popcart').popover('show');
+  }
+  function clearCart() {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      for (var item in cart) {
+          document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">добавить</button>'
+      }
+      localStorage.clear();
+      cart = {};
+      updateCart(cart);
+  }
+  function updateCart(cart) {
+      var sum = 0;
+      for (var item in cart) {
+          sum = sum + cart[item];
+          document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = sum;
+      console.log(cart);
+      updatePopover(cart);
+  }
+  // If plus or minus button is clicked, change the cart as well as the display value
+  $('.divpr').on("click", "button.minus", function() {
+      a = this.id.slice(7, );
+      cart['pr' + a] = cart['pr' + a] - 1;
+      cart['pr' + a] = Math.max(0, cart['pr' + a]);
+      document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+      updateCart(cart);
+  });
+  $('.divpr').on("click", "button.plus", function() {
+      a = this.id.slice(6, );
+      cart['pr' + a] = cart['pr' + a] + 1;
+      document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+      updateCart(cart);
+  });
+  </script>
+{%endblock%}
+
+
+
+
+{% comment %} <form action="{% url "cart:cart_add" product_id=product.id %}" method="post">
+  {{ cart_product_form }}
+  {% csrf_token %}
+  <input type="submit" value= заказать class="btn btn-primary">
+</form> {% endcomment %}

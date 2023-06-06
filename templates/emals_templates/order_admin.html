@@ -1,0 +1,35 @@
+{% load static %}
+<p>{{ first_name }}</p>
+<p>{{ last_name }}</p>
+<p>{{ middle_name }}</p>
+<p>{{ street }}</p>
+<p>{{ house_number }}</p>
+<p>{{building_number }}</p>
+<p>{{ apartment_office_number }}</p>
+<p>{{ entrance_number }}</p>
+<p>{{floor_number }}</p>
+<p>{{ phone_number }}</p>
+<p>{{ email }}</p>
+<p>{{ payment_method }}</p>
+<p>{{ additional_notes }}</p>
+{% for item in cart %}
+{% with product=item.product %}
+    <tr>
+       
+        <p class="text-center">
+        <td>{{ product.name }}</td>
+        <td>{{ item.quantity }}</td>
+       
+        <td class="num">{{ item.price }}руб</td>
+        
+    </tr>
+{% endwith %}
+{% endfor %}
+<tr class="total">
+<td>итого</td>
+<td colspan="4"></td>
+<td class="num">{{ cart.get_total_price }}руб</td>
+
+
+</tr>
+</tbody>

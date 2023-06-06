@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}<title>{{products.name}}</title>{% endblock title %}
+{% block content %}
+<div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
+
+        
+  <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
+
+      <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="">
+      
+</a>
+
+      <div class="flex items-center" id="store-nav-content">
+
+          <a class="pl-3 inline-block no-underline hover:text-black" href="#">
+              
+          </a>
+
+          <a class="pl-3 inline-block no-underline hover:text-black" href="#">
+              
+          </a>
+
+      </div>
+</div>
+</nav>
+<div class="col-4">
+  <div class="card">
+    <a href=""></a>
+      {% thumbnail products.image "400x400" crop="center" as im %}
+    
+          <img src="{{ im.url }}" class="card-img-top" alt="...">
+          {% endthumbnail %}
+          <div class="card-body">
+            <h5 class="card-title">{{products.name}}</h5>
+            <p class="card-text">{{products.price}} руб.</p>
+            <p class="card-text">{{products.description}}</p>
+            
+
+            <form action="{% url "cart:cart_add" products.id %}" method="post">
+              {{ cart_product_form }}
+              {% csrf_token %}
+              <input type="submit" value= заказать class="btn btn-primary">
+          </form>
+            
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

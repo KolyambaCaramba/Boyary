@@ -1,0 +1,183 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Самовар - кафе домашней кухни</title>
+ <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+{% load static %}
+ 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+<style>
+html, body {
+	font-size: 16px; /* Устанавливаем размер шрифта */
+	line-height: 1.5; /* Устанавливаем высоту строки */
+	background-color: #e1cbaa;
+	margin: 0; /* Убираем отступы */
+	padding: 0; /* Убираем внутренние отступы */
+	height: 100%; /* Устанавливаем высоту на 100% */
+	font-family: 'Comfortaa', cursive; /* Устанавливаем шрифт */
+
+}
+
+/* Стили для навигационного меню */
+nav {
+	background-color: #463d32; /* Устанавливаем цвет фона */
+	padding: 1em; /* Устанавливаем отступы вокруг элемента */
+	display: flex; /* Устанавливаем flex-контейнер */
+	flex-direction: row; /* Устанавливаем направление главной оси */
+	justify-content: space-between; /* Распределяем элементы по оси X */
+	align-items: center; /* Выравниваем элементы по оси Y */
+	flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
+}
+
+/* Стили для изображения в навигационном меню */
+nav img {
+	margin-right: 1em; /* Устанавливаем отступ справа */
+}
+
+/* Стили для ссылок в навигационном меню */
+nav a {
+    text-align: right;
+	color: #fff; /* Устанавливаем цвет текста */
+	display: block; /* Устанавливаем блочный тип элемента */
+	margin: 0 1em; /* Устанавливаем отступы между элементами */
+	text-decoration: none; /* Убираем подчеркивание ссылок */
+}
+
+/* Стили для основного содержимого страницы */
+main {
+	padding: 1em; /* Устанавливаем отступы вокруг элемента */
+
+}
+
+/* Стили для секций на странице */
+section {
+	margin-bottom: 1em; /* Устанавливаем отступ снизу */
+}
+
+/* Стили для статей на странице */
+article {
+	background-color: #f7f7f7; /* Устанавливаем цвет фона */
+	border: 1px solid #ccc; /* Устанавливаем границу */
+	padding: 1em; /* Устанавливаем отступы вокруг элемента */
+}
+
+/* Стили для футера на странице */
+footer {
+	background-color: #463d32; /* Устанавливаем цвет фона */
+	color: #fff; /* Устанавливаем цвет текста */
+	padding: 1em; /* Устанавливаем отступы вокруг элемента */
+	text-align: center; /* Выравниваем текст по центру */
+	display: flex; /* Устанавливаем flex-контейнер */
+	flex-direction: row; /* Устанавливаем направление главной оси */
+	justify-content: space-between; /* Распределяем элементы по оси X */
+	align-items: center; /* Выравниваем элементы по оси Y */
+}
+
+/* Стили для левой части футера */
+.footer-left {
+	text-align: left; /* Выравниваем текст по левому краю */
+}
+
+/* Стили для правой части футера */
+.footer-right {
+	text-align: right; /* Выравниваем текст по правому краю */
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 1079px) {
+	nav {
+		flex-direction: column; /* Устанавливаем направление главной оси */
+		text-align: center; /* Выравниваем текст по центру */
+	}
+	nav img {
+		margin-bottom: 1em; /* Устанавливаем отступ снизу */
+	}
+	footer {
+		flex-direction: column; /* Устанавливаем направление главной оси */
+		justify-content: center; /* Выравниваем элементы по центру */
+		align-items: center; /* Выравниваем элементы по центру */
+	}
+	.footer-left,
+	.footer-right {
+		width: 100%; /* Устанавливаем ширину на 100% */
+		text-align: center; /* Выравниваем текст по центру */
+	}
+	.footer-left {
+		margin-bottom: 1em; /* Устанавливаем отступ снизу */
+	}
+	section article img {
+        max-width: 100%;
+    }
+}
+
+/* Стили для десктопных устройств */
+@media (min-width: 1080px) {
+	nav {
+		max-width: 1080px; /* Устанавливаем максимальную ширину */
+		margin: 0 auto; /* Выравниваем элементы по центру */
+	}
+	main {
+		max-width: 1080px; /* Устанавливаем максимальную ширину */
+		margin: 0 auto; /* Выравниваем элементы по центру */
+	}
+	@media (max-width: 1079px) {
+		footer {
+			flex-direction: column; /* Устанавливаем направление главной оси */
+			justify-content: center; /* Выравниваем элементы по центру */
+			align-items: center; /* Выравниваем элементы по центру */
+		}
+		.footer-left,
+		.footer-right {
+			width: 100%; /* Устанавливаем ширину на 100% */
+			text-align: center; /* Выравниваем текст по центру */
+		}
+		.footer-left {
+			margin-bottom: 1em; /* Устанавливаем отступ снизу */
+		}
+	}
+
+	/* Стили для десктопных устройств */
+	@media (min-width: 1080px) {
+		nav {
+			max-width: 1080px; /* Устанавливаем максимальную ширину */
+			margin: 0 auto; /* Выравниваем элементы по центру */
+		}
+		main {
+			max-width: 1080px; /* Устанавливаем максимальную ширину */
+			margin: 0 auto; /* Выравниваем элементы по центру */
+		}
+		footer {
+			max-width: 1080px; /* Устанавливаем максимальную ширину */
+			margin: 0 auto; /* Выравниваем элементы по центру */
+		}
+		section article img {
+            max-width: 100%;
+            }
+</style>
+ </head>
+<body>
+{% include 'includes/header.html' %}
+    <main>
+    <section>
+    <article>
+        {%block content%} {%endblock%}
+    <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+{% block js %} {% endblock%}
+        </article>
+</section>
+    </main>
+<footer>
+    {%include 'includes/footer.html' %}
+</footer>
+</body>
+</html>
