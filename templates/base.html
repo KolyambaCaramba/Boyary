@@ -110,6 +110,30 @@ footer {
     }
 }
 
+@media (max-width: 1079px) {
+  .card-subtitle {
+    display: none;
+  }
+  .card {
+    width: 30%; /*изменено с 30% на 100%*/
+  }
+  .card-title {
+    font-size: 8px;
+  }
+  .card-text, .btn {
+    font-size: 6px; /*добавлено*/
+  }
+}
+
+@media (max-width: 1079px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr); /*изменено с 4 на 1*/
+  }
+  .card {
+    margin: 0 0 1rem 0; /*изменено с 2rem на 1rem*/
+  }
+}
+
 /* Стили для десктопных устройств */
 @media (min-width: 1080px) {
 	nav {
@@ -153,6 +177,32 @@ footer {
 		section article img {
             max-width: 100%;
             }
+
+            .menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.menu__item1 {
+  margin: 0 10px;
+}
+
+.menu__item1 a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+}
+
+.menu__item1 a:hover {
+  background-color: black;
+  color: white;
+}
 </style>
  </head>
 <body>

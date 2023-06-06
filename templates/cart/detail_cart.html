@@ -1,12 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
+{% load thumbnail %}
+{% block title %}
+ {% endblock %}
+
+
 {% block content %}
+{% if cart %}
+  <ul>
+    {% for item in cart %}
+      <li>{{ item.product.name }} - {{ item.quantity }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Корзина пуста</p>
+{% endif %}
+
 <div class="container " style="background-color:Bisque;">
     <h1>корзина</h1>
     <table class="cart">
         <thead>
         <tr>
-       
+
         </tr>
         </thead>
         <tbody>
@@ -41,7 +56,7 @@
     </table>
     <p class="text-right">
         <a href="{% url "products:index" %}" class="btn btn-primary">вернутся к меню</a>
-        <a href="{% url "orders:order_create" %}" class="btn btn-primary">оформит заказ</a>
+        <a href="{% url 'orders:create' %}" class="btn btn-primary">Оформить заказ</a>
     </p>
 </div>
 
@@ -52,12 +67,12 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
           <p><span class="h2">Ваша корзина </span><span class="h4">{{ item.quantity }}</span></p>
-  
+
           <div class="card mb-4">
             <div class="card-body p-4">
                 {% for item in cart %}
                 {% with product=item.product %}
-  
+
               <div class="row align-items-center">
                 <div class="col-md-2">
                   <img src="{% if product.image %}
@@ -74,7 +89,7 @@
                   </div>
                 </div>
                 <div class="col-md-2 d-flex justify-content-center">
-                 
+
                 </div>
                 <div class="col-md-2 d-flex justify-content-center">
                   <div>
@@ -88,7 +103,7 @@
                     <p class="lead fw-normal mb-0">{{ item.price }}руб</p>
                   </div>
                 </div>
-               
+
                 <div class="col-md-2 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Итого</p>
@@ -98,30 +113,32 @@
                   {% endfor %}
                 </div>
               </div>
-  
+
             </div>
           </div>
-  
+
           <div class="card mb-5">
             <div class="card-body p-4">
-  
+
               <div class="float-end">
                 <p class="mb-0 me-5 d-flex align-items-center">
                   <span class="small text-muted me-2">Весь заказ:</span> <span
                     class="lead fw-normal">{{ cart.get_total_price }}руб</span>
                 </p>
               </div>
-  
+
             </div>
           </div>
-  
+
           <div class="d-flex justify-content-end">
             <a href="{% url "products:index" %}" type="button" class="btn btn-light btn-lg me-2">Вернуться в меню</button></a>
             <a href="{% url "orders:order_create" %}"button type="button" class="btn btn-primary btn-lg">Заказать</button></a>
           </div>
-  
+
         </div>
       </div>
     </div>
   </section>
 {% endblock %}
+
+
