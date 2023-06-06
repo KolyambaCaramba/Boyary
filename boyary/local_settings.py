@@ -1,5 +1,0 @@
-SECRET_KEY = 'x!)m7x^qxoo2&a6k@k0lz5&9*p&p(^8=i!vlh@q=k46gv56u36'
-EMAIL_HOST_USER = '363ddd61a75f5e'
-EMAIL_HOST_PASSWORD = '6776f087bd9651'
-FROM_EMAIL = 'krivov.av91@yandex.ru'
-EMAIL_ADMIN = 'krivov.av91@yandex.ru'
