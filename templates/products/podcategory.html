@@ -1,62 +1,39 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
 {% block title %}<title>Самовар</title>{% endblock title %}
-{%block content%}
+{% block content %}
 
-   
-      
-       
-
-    <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
-
-        
-      <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
-
-          <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="">
-                {{podcategory}}
-  </a>
-  
-  <div class="flex items-center" id="store-nav-content">
-
-                  
-
-                 
-
-  </div>
+<div class="container uppercase text-black text-center" style="font-size: 24px;">
+    {{ podcategory }}
+    <div class="flex items-center" id="store-nav-content"></div>
 </div>
-</nav>
-
-
-{% for product in products%}
-
-
-<div class="col-4">
-
-
-   
-
-  <div class="card" style="width: 20rem;">
-    <a href="{% url 'products:product' product.slug%}">
-    {% thumbnail product.image "400x400" crop="center" as im %}
-    <img src="{{ im.url }}" class="card-img-top" alt="...">
-    {% endthumbnail %}
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5></a>
-      <p class="card-text">{{product.price}}</p>
-      <p class="card-text">{{product.description}}</p>
-          <form action="{% url "cart:cart_add" product_id=product.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-            <input type="submit" value= заказать class="btn btn-primary">
-        </form>
-          
+<div class="d-flex flex-wrap justify-content-between align-items-start" style="padding: 2rem;">
+    {% for product in products %}
+    <div class="card mb-4" style="background-color: #e1cbaa; width: 23%;">
+        <a href="{% url 'products:product' product.slug %}">
+            {% thumbnail product.image "400x400" crop="center" as im %}
+            <img src="{{ im.url }}" class="card-img-top" alt="...">
+            {% endthumbnail %}
+        </a>
+        <div class="card-body">
+            <h5 class="card-title text-center" id="namepr{{ product.id }}">{{ product.name }}</h5>
+            {% if not request.user_agent.is_mobile %}
+            <h5 class="card-subtitle mb-2 text-muted small text-center">{{ product.description }}</h5>
+            {% endif %}
+            <p class="card-text text-center">{{ product.price }} руб.</p>
+            <span id="divpr{{ product.id }}" class="divpr">
+                <form action="{% url "cart:cart_add" product_id=product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <input type="submit" value="Добавить в корзину" class="btn btn-primary">
+                </form>
+            </span>
+        </div>
     </div>
-  </div>
+    {% endfor %}
 </div>
 
-{% endfor %}
+{% endblock %}
 
-{%endblock%}
-    
 

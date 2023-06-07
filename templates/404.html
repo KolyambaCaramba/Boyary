@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}
+ {% endblock %}
+{% block content %}
+    <p>
+    Что-то пошло не так
+    </p>
+<a class="btn btn-success" href="{% url 'products:index' %}" role="button">Вернуться на главную</a>
+</div>
+{% endblock %}

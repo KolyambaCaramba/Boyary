@@ -1,7 +1,7 @@
 html, body {
 	font-size: 16px; /* Устанавливаем размер шрифта */
 	line-height: 1.5; /* Устанавливаем высоту строки */
-	background-color: #e1cbaa;
+	background-color: #ede1ce;
 	margin: 0; /* Убираем отступы */
 	padding: 0; /* Убираем внутренние отступы */
 	height: 100%; /* Устанавливаем высоту на 100% */
@@ -47,7 +47,7 @@ section {
 
 /* Стили для статей на странице */
 article {
-	background-color: #f7f7f7; /* Устанавливаем цвет фона */
+	background-color: #e1cbaa; /* Устанавливаем цвет фона */
 	border: 1px solid #ccc; /* Устанавливаем границу */
 	padding: 1em; /* Устанавливаем отступы вокруг элемента */
 }

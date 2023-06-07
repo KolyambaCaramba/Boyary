@@ -5,8 +5,56 @@
 {%block content%}
 
 <img src="{% static 'img/PrivetPicture001.png' %}" class="card-img-top">
+<style>
+.btn-outline-info {
+  color: black;
+}
+#spoiler {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+</style>
+<article>
+<div class="container mx-auto flex items-center flex-wrap text-center">
+<button type="button" class="btn btn-outline-info btn-sm"  onclick="myFunction()">Условия доставки</button>
+</div>
+
+<div id="spoiler" style="display:none">
+    <p> </p>
+  <p>  Наше кафе принимает онлайн-заказы С 10:00 до 21:00.</p>
+   <p>
+  Связаться с нами можно по следующим номерам:
+</p>
+  <a href="tel:+79139151717" class="btn btn-outline-info btn">8-913-915-17-17</a>
+  <a href="tel:+79139151717" class="btn btn-outline-info btn">291-17-17</a>
+  <p>Условия доставки по районам:</p>
+  <p> </p>
+  <p>Заельцовский район, Железнодорожный район, Центральный район, Октябрьский район, Дзержинский район, Калининский район</p>
+  <p>Минимальный заказ 1000 рублей, Бесплатная доставка от 1200 рублей, Стоимость платной доставки 150 рублей</p>
+  <p> </p>
+  <p>Ленинский район, Кировский район, п.Садовый, п. Восход, Каменка, Снегири, Родники</p>
+  <p>Минимальный заказ 1500 рублей, Бесплатная доставка от 2000 рублей, Стоимость платной доставки 200 рублей</p>
+  <p> </p>
+  <p>Первомайский район, Советский район, Пашино, Кудряшовский, поселок Ключ-Камышенское плато, Обь ГЭС, Новомарусино, Кольцово, поселок Васхнил, Барышево, поселок Краснообск, поселок Элитный, поселок Криводановка, село Толмачево, село Юный Ленинец, поселок Мичуринский</p>
+  <p>Минимальный заказ 2000 рублей, Бесплатная доставка от 2500 рублей, Стоимость платной доставки 500 рублей</p>
+
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("spoiler");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+  </article>
        <article>
-      <div class="container mx-auto flex items-center flex-wrap text-center" style="background-color:Bisque;">
+      <div class="container mx-auto flex items-center flex-wrap text-center">
   <div class="w-full container mx-auto flex flex-wrap items-center justify-between">
     <div class="row">
       <div class="container-my">
@@ -26,6 +74,23 @@
 </div>
        </article>
 <article>
+  <script>
+  // Получаем все карточки на странице
+  const cards = document.querySelectorAll('.card');
+
+  // Находим высоту самой высокой карточки
+  let maxHeight = 0;
+  cards.forEach(card => {
+    if (card.offsetHeight > maxHeight) {
+      maxHeight = card.offsetHeight;
+    }
+  });
+
+  // Устанавливаем фиксированную высоту для всех карточек
+  cards.forEach(card => {
+    card.style.height = `${maxHeight}px`;
+  });
+</script>
     {% for cat in categorys %}
       <div class="container uppercase text-black text-center" href="{% url 'products:category' cat.slug %}" style="font-size: 24px;">
         {{ cat.name }}
