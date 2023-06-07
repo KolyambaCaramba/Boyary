@@ -23,9 +23,9 @@ INSTALLED_APPS = [
     
     'politica.apps.PolitConfig',
     'products.apps.ProductsConfig',
-    'cart.apps.CartConfig',
     'django.contrib.admin',
     'django.contrib.auth',
+    'cart',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',

@@ -9,5 +9,5 @@ def order_create(request):
     return render(request, 'order_create.html')
 def instruction(request):
     return render(request, 'instruction.html')
-def korzina(request):
-    return render(request, 'cart001.html')
+#def cart(request):
+    #return render(request, 'cart001.html')

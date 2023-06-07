@@ -38,7 +38,7 @@
             <p class="card-text">{{products.description}}</p>
             
 
-            <form action="{% url "cart:cart_add" products.id %}" method="post">
+            <form action="{% url "cart:add_to_cart" products.id %}" method="post">
               {{ cart_product_form }}
               {% csrf_token %}
               <input type="submit" value= заказать class="btn btn-primary">
