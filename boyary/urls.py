@@ -8,7 +8,8 @@ app_name = 'boyary'
 urlpatterns = [
     path('about', views.about_template, name='about_template'),
     path('instruction', views.instruction, name='about_template'),
-    path('cart/', include('cart.urls', namespace='cart')),
+    path('korzina', views.korzina, name='korzina'),
+    # path('cart', views.cart, name='cart'),
     path('orders/', include('orders.urls', namespace='orders')),
     path('', include('products.urls', namespace='products')),
     path('admin', admin.site.urls),

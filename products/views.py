@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from math import ceil
-from django.http import HttpResponse
 from cart.forms import CartAddProductForm
 from .models import Category, Product, Podcategory
-from django.core.paginator import Paginator
+from django.views.decorators.http import require_POST
 
-
+@require_POST
+def cart_add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.add(product=product)
+    return redirect('cart:cart_detail')
 def index(request):
     template = 'products/index.html'
     categorys =    Category.objects.all()

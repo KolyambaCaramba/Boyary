@@ -4,4 +4,15 @@
 {% block title %}
  {% endblock %}
 
-<p>Корзина пуста</p>
+{% block content %}
+{% if cart %}
+  <ul>
+    {% for item in cart %}
+      <li>{{ item.product.name }} - {{ item.quantity }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Корзина пуста</p>
+{% endif %}
+
+{% endblock %}

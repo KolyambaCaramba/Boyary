@@ -4,7 +4,7 @@
 {% block title %}<title>Самовар</title>{% endblock title %}
 {%block content%}
 
-<img src="{% static 'img/PrivetPicture001.png' %}" class="card-img-top">
+<img src="{% static 'img/PrivetPicture001.png' %}" class="img">
 <style>
 .btn-outline-info {
   color: black;
@@ -95,9 +95,10 @@ function myFunction() {
                 <h5 class="card-subtitle mb-2 text-muted small text-center">{{ product.description }}</h5>
               {% endif %}
               <p class="card-text text-center">{{ product.price }} руб.</p>
-              <span id="divpr{{ product.id }}" class="divpr">
-                <button id="pr{{ product.id }}" class="btn btn-primary cart">Добавить в корзину</button>
-              </span>
+              <form action="{% url 'products:cart_add' product.id %}" method="post">
+  {% csrf_token %}
+  <button type="submit" id="pr{{ product.id }}" class="btn btn-primary cart">Добавить в корзину</button>
+</form>
             </div>
           </div>
         {% endfor %}
