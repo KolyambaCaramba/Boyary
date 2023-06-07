@@ -74,23 +74,8 @@ function myFunction() {
 </div>
        </article>
 <article>
-  <script>
-  // Получаем все карточки на странице
-  const cards = document.querySelectorAll('.card');
 
-  // Находим высоту самой высокой карточки
-  let maxHeight = 0;
-  cards.forEach(card => {
-    if (card.offsetHeight > maxHeight) {
-      maxHeight = card.offsetHeight;
-    }
-  });
 
-  // Устанавливаем фиксированную высоту для всех карточек
-  cards.forEach(card => {
-    card.style.height = `${maxHeight}px`;
-  });
-</script>
     {% for cat in categorys %}
       <div class="container uppercase text-black text-center" href="{% url 'products:category' cat.slug %}" style="font-size: 24px;">
         {{ cat.name }}
