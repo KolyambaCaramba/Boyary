@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Оформление заказа</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a class="nav-link" href="{% url 'orders:create' %}">Оформить заказ</a>
+  </form>
+{% endblock %}
