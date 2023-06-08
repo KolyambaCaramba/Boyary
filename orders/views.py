@@ -26,7 +26,7 @@ def send_order_email(order, cart):
     msg.attach_alternative(html_body, 'text/html')
     msg.send()
 def order_create(request):
-    cart = Cart(request)пше
+    cart = Cart(request)
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():

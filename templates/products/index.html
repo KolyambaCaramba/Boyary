@@ -94,11 +94,11 @@ function myFunction() {
               {% if not request.user_agent.is_mobile %}
                 <h5 class="card-subtitle mb-2 text-muted small text-center">{{ product.description }}</h5>
               {% endif %}
-              <p class="card-text text-center">{{ product.price }} руб.</p>
+              <p class="card-price-txt">{{ product.price }} руб.</p>
               <form action="{% url 'products:cart_add' product.id %}" method="post">
   {% csrf_token %}
-  <button type="submit" id="pr{{ product.id }}" class="btn btn-primary cart">Добавить в корзину</button>
-</form>c
+<!--          <button type="submit" id="pr{{ product.id }}" class="btn btn-primary cart">Добавить в корзину</button>-->
+</form>
             </div>
           </div>
         {% endfor %}
@@ -187,7 +187,7 @@ function myFunction() {
 
 
 
-{% comment %} <form action="{% url "cart:cart_add" product_id=product.id %}" method="post">
+{% comment %} <form action="{% url  product_id=product.id %}" method="post">
   {{ cart_product_form }}
   {% csrf_token %}
   <input type="submit" value= заказать class="btn btn-primary">

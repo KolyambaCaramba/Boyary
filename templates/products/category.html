@@ -4,85 +4,37 @@
 {% block title %}<title>Самовар</title>{% endblock title %}
 {%block content%}
 
-{% comment %} <cection>
-  <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
-    <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
-    
-    <div class="row">
-      <div class="container-my">
-      <div class="col" style="background:  white;">
-        {% for pod in podcategorys%}
-        <nav >
-          <ul class="menu d-flex justify-content-center">
-            <li class="menu__item1">
-              
-              <a href="{% url 'products:podcategory' pod.slug%}"> {{pod.name}}</a>
-            </li>
-            {% endfor %}
-            
-            </li>
-          </ul>
-        </nav>
+<article>
+    {% for pod in podcategorys %}
+      <div class="container uppercase text-black text-center" href="{% url 'products:category' pod.slug %}" style="font-size: 24px;">
+        {{ cat.name }}
+        <div class="flex items-center" id="store-nav-content"></div>
       </div>
-      </div>
-    </div>
-  
-
-
-
-</cection> {% endcomment %}
-      
-       
-
-    <div class="container mx-auto flex items-center flex-wrap " style="background-color:Bisque;">
-
-        
-            <div class="w-full container mx-auto flex flex-wrap items-center justify-between ">
-
-                <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="">
-                {{category}}
-  </a>
-  
-                <div class="flex items-center" id="store-nav-content">
-
-                  
-
-                 
-
-                </div>
-          </div>
-        </nav>
-        
-        
-        {% for product in products%}
-        
-
-        <div class="col-4">
-        
-        
-                 
-              
-          <div class="card" style="width: 20rem;">
-            <a href="{% url 'products:product' product.slug%}">
-            {% thumbnail product.image "400x400" crop="center" as im %}
-            <img src="{{ im.url }}" class="card-img-top" alt="...">
-            {% endthumbnail %}
+      <div class="d-flex flex-wrap justify-content-between align-items-start" style="padding: 2rem;">
+        {% for product in cat.products.all %}
+          <div class="card mb-4" style="background-color: #e1cbaa; width: 23%;">
+            <a href="{% url 'products:product' product.slug %}">
+              {% thumbnail product.image "400x400" crop="center" as im %}
+              <img src="{{ im.url }}" class="card-img-top" alt="...">
+              {% endthumbnail %}
+            </a>
             <div class="card-body">
-              <h5 class="card-title">{{product.name}}</h5></a>
-              <p class="card-text">{{product.price}}</p>
-              <p class="card-text">{{product.description}}</p>
-                  <form action="{% url "cart:cart_add" product_id=product.id %}" method="post">
-                    {{ cart_product_form }}
-                    {% csrf_token %}
-                    <input type="submit" value= заказать class="btn btn-primary">
-                </form>
-                  
+              <h5 class="card-title text-center" id="namepr{{ product.id }}">{{ product.name }}</h5>
+              {% if not request.user_agent.is_mobile %}
+                <h5 class="card-subtitle mb-2 text-muted small text-center">{{ product.description }}</h5>
+              {% endif %}
+              <p class="card-price-txt">{{ product.price }} руб.</p>
+              <form action="{% url 'products:cart_add' product.id %}" method="post">
+                {% csrf_token %}
+                <!-- <button type="submit" id="pr{{ product.id }}" class="btn btn-primary cart">Добавить в корзину</button> -->
+              </form>
             </div>
           </div>
-        </div>
-      
         {% endfor %}
-        
+      </div>
+    {% endfor %}
+  </article>
+
 
 {%endblock%}
     

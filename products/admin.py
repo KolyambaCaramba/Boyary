@@ -14,8 +14,8 @@ admin.site.register(Podcategory, PodcategoryAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price', 'stock', 'available']
-    list_filter = ['available']
-    list_editable = ['price', 'stock', 'available']
+    list_display = ['name', 'slug', 'price', 'available']
+    list_filter = ['available', 'category', 'podcategory']
+    list_editable = ['price', 'available']
     prepopulated_fields = {'slug': ('name',)}
 admin.site.register(Product, ProductAdmin)

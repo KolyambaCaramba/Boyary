@@ -13,7 +13,7 @@ def add_to_cart(request, product_id):
     return redirect('cart001.html')
 def index(request):
     template = 'products/index.html'
-    categorys =    Category.objects.all()
+    categorys =    categorys = Category.objects.all().order_by('slug')
     podcategorys = Podcategory.objects.all()
     
     
@@ -62,8 +62,7 @@ def product(request,  slug):
     cart_product_form = CartAddProductForm()
     context = {
          'products': products,
-         'cart_product_form': cart_product_form,
-         'cart_product_form': cart_product_form
+        'cart_product_form': cart_product_form
     }   
                                 
     return render(request, template, context)
